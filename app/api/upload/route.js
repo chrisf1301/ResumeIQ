@@ -76,6 +76,18 @@ export async function POST(request) {
         });
     } catch (error) {
         console.error('Upload error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        
+        // Provide more helpful error messages
+        let errorMessage = error.message;
+        if (error.message.includes('signature')) {
+            errorMessage = 'AWS credentials error. Please check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in Vercel environment variables.';
+        } else if (error.message.includes('bucket')) {
+            errorMessage = 'S3 bucket error. Please check your S3_BUCKET_NAME and AWS_REGION in Vercel environment variables.';
+        }
+        
+        return NextResponse.json({ 
+            error: errorMessage,
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        }, { status: 500 });
     }
 }
