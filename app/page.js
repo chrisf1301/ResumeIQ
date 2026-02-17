@@ -22,8 +22,9 @@ export default function Home() {
             return;
         }
 
-        if (file.size > 10 * 1024 * 1024) {
-            alert('File size must be less than 10MB.');
+        // Vercel has a 4.5MB limit for serverless functions
+        if (file.size > 4.5 * 1024 * 1024) {
+            alert('File size must be less than 4.5MB due to Vercel limits. Please compress your file or use a smaller version.');
             return;
         }
 
@@ -166,10 +167,10 @@ export default function Home() {
                             <polyline points="17 8 12 3 7 8"></polyline>
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
-                        <p className="upload-text">
-                            <strong>Click to upload</strong> or drag and drop<br />
-                            PDF, DOC, DOCX, or TXT (max 10MB)
-                        </p>
+                    <p className="upload-text">
+                        <strong>Click to upload</strong> or drag and drop<br />
+                        PDF, DOC, DOCX, or TXT (max 4.5MB)
+                    </p>
                     </div>
                     {selectedFile && currentResumeId && (
                         <div className="file-info show">

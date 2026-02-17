@@ -7,6 +7,7 @@ import { pool } from '@/lib/db';
 // Disable body parsing, we'll handle it manually
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 // Extract text from different file types
 async function extractText(buffer, filename) {
