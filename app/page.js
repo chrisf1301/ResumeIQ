@@ -38,6 +38,18 @@ export default function Home() {
                 body: formData
             });
 
+            if (!response.ok) {
+                const errorText = await response.text();
+                let errorMessage = 'Upload failed';
+                try {
+                    const errorData = JSON.parse(errorText);
+                    errorMessage = errorData.error || errorMessage;
+                } catch {
+                    errorMessage = errorText || `Server error: ${response.status}`;
+                }
+                throw new Error(errorMessage);
+            }
+
             const data = await response.json();
 
             if (data.success) {
@@ -69,6 +81,18 @@ export default function Home() {
                     jobDescription: jobDescription.trim()
                 })
             });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                let errorMessage = 'Analysis failed';
+                try {
+                    const errorData = JSON.parse(errorText);
+                    errorMessage = errorData.error || errorMessage;
+                } catch {
+                    errorMessage = errorText || `Server error: ${response.status}`;
+                }
+                throw new Error(errorMessage);
+            }
 
             const data = await response.json();
 

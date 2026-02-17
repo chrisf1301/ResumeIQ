@@ -29,5 +29,3 @@ yarn-error.log*
 # Vercel
 .vercel
 
-# Elastic Beanstalk
-.elasticbeanstalk/
