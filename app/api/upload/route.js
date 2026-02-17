@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import path from 'path';
-import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import { uploadToS3 } from '@/lib/s3';
 import { pool } from '@/lib/db';
@@ -14,6 +13,8 @@ async function extractText(buffer, filename) {
     const ext = path.extname(filename).toLowerCase();
     
     if (ext === '.pdf') {
+        // Dynamic import for CommonJS module
+        const pdfParse = (await import('pdf-parse')).default;
         const data = await pdfParse(buffer);
         return data.text;
     } 

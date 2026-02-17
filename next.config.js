@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Allow file uploads up to 10MB
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
+  // Serverless function configuration
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
     },
   },
+  // Turbopack configuration (Next.js 16+)
+  turbopack: {},
 }
 
 module.exports = nextConfig
