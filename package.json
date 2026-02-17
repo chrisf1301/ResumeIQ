@@ -1,0 +1,40 @@
+{
+  "name": "resumeiq",
+  "version": "1.0.0",
+  "description": "Smart resume-to-job matching application.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisf1301/ResumeIQ.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/chrisf1301/ResumeIQ/issues"
+  },
+  "homepage": "https://github.com/chrisf1301/ResumeIQ#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.990.0",
+    "@aws-sdk/lib-storage": "^3.990.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mammoth": "^1.11.0",
+    "multer": "^2.0.2",
+    "next": "^16.1.6",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.18.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}

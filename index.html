@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ - Smart Resume Matching</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">Resume<span>IQ</span></h1>
+        <p class="tagline">Smart resume-to-job matching powered by AI</p>
+    </header>
+
+    <div class="container">
+        <!-- Resume Upload Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h2 class="card-title">Upload Resume</h2>
+            </div>
+            <div class="upload-zone" id="resumeZone">
+                <input type="file" id="resumeInput" accept=".pdf,.doc,.docx,.txt">
+                <svg class="upload-icon" viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <p class="upload-text">
+                    <strong>Click to upload</strong> or drag and drop<br>
+                    PDF, DOC, DOCX, or TXT (max 10MB)
+                </p>
+            </div>
+            <div class="file-info" id="resumeFileInfo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <span class="file-name" id="resumeFileName"></span>
+                <button class="remove-file" id="removeResume" title="Remove file">✕</button>
+            </div>
+        </div>
+
+        <!-- Job Description Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </div>
+                <h2 class="card-title">Job Description</h2>
+            </div>
+            <textarea 
+                id="jobDescription" 
+                placeholder="Paste the job description here...
+
+Include requirements, qualifications, and responsibilities for the best matching results."
+            ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-section">
+            <button class="submit-btn" id="analyzeBtn" disabled>
+                <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Analyze Match
+            </button>
+        </div>
+
+        <!-- Result Section (hidden by default) -->
+        <div class="result-section" id="resultSection">
+            <div class="result-card">
+                <h3 class="result-title">Match Score</h3>
+                <div class="score-display" id="scoreDisplay">--</div>
+                <p class="score-label">Based on skills and requirements alignment</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

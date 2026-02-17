@@ -1,0 +1,56 @@
+/* Layout and structure */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 0.6s ease-out;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.tagline {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    animation: fadeUp 0.6s ease-out 0.2s both;
+}
+
+.submit-section {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    animation: fadeUp 0.6s ease-out 0.4s both;
+}
+
+.result-section {
+    grid-column: 1 / -1;
+    display: none;
+}
+
+.result-section.show {
+    display: block;
+    animation: fadeUp 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
