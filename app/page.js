@@ -9,6 +9,7 @@ export default function Home() {
     const [currentResumeId, setCurrentResumeId] = useState(null);
     const [jobDescription, setJobDescription] = useState('');
     const [score, setScore] = useState(null);
+    const [analysis, setAnalysis] = useState(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -70,6 +71,7 @@ export default function Home() {
 
         setIsAnalyzing(true);
         setScore(null);
+        setAnalysis(null);
 
         try {
             const response = await fetch('/api/analyze', {
@@ -99,6 +101,12 @@ export default function Home() {
 
             if (data.success) {
                 setScore(data.score);
+                setAnalysis({
+                    strengths: data.strengths || [],
+                    weaknesses: data.weaknesses || [],
+                    recommendations: data.recommendations || [],
+                    summary: data.summary || ''
+                });
             } else {
                 throw new Error(data.error || 'Analysis failed');
             }
@@ -243,7 +251,66 @@ Include requirements, qualifications, and responsibilities for the best matching
                         <div className="result-card">
                             <h3 className="result-title">Match Score</h3>
                             <div className="score-display">{score}%</div>
-                            <p className="score-label">Based on skills and requirements alignment</p>
+                            <p className="score-label">AI-powered analysis</p>
+                            
+                            {analysis && (
+                                <div style={{marginTop: '30px', textAlign: 'left'}}>
+                                    {analysis.summary && (
+                                        <div style={{marginBottom: '24px', padding: '16px', background: 'var(--bg-secondary)', borderRadius: '12px'}}>
+                                            <h4 style={{color: 'var(--accent)', marginBottom: '8px', fontSize: '1.1rem'}}>Summary</h4>
+                                            <p style={{color: 'var(--text-secondary)', lineHeight: '1.6'}}>{analysis.summary}</p>
+                                        </div>
+                                    )}
+                                    
+                                    {analysis.strengths && analysis.strengths.length > 0 && (
+                                        <div style={{marginBottom: '24px'}}>
+                                            <h4 style={{color: 'var(--accent)', marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                                <span style={{fontSize: '1.5rem'}}>✓</span> Strengths
+                                            </h4>
+                                            <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                                                {analysis.strengths.map((strength, idx) => (
+                                                    <li key={idx} style={{padding: '8px 0', paddingLeft: '24px', color: 'var(--text-primary)', position: 'relative'}}>
+                                                        <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>•</span>
+                                                        {strength}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                    
+                                    {analysis.weaknesses && analysis.weaknesses.length > 0 && (
+                                        <div style={{marginBottom: '24px'}}>
+                                            <h4 style={{color: 'var(--error)', marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                                <span style={{fontSize: '1.5rem'}}>⚠</span> Areas to Improve
+                                            </h4>
+                                            <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                                                {analysis.weaknesses.map((weakness, idx) => (
+                                                    <li key={idx} style={{padding: '8px 0', paddingLeft: '24px', color: 'var(--text-primary)', position: 'relative'}}>
+                                                        <span style={{position: 'absolute', left: 0, color: 'var(--error)'}}>•</span>
+                                                        {weakness}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                    
+                                    {analysis.recommendations && analysis.recommendations.length > 0 && (
+                                        <div>
+                                            <h4 style={{color: 'var(--accent)', marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                                <span style={{fontSize: '1.5rem'}}>💡</span> Recommendations
+                                            </h4>
+                                            <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                                                {analysis.recommendations.map((rec, idx) => (
+                                                    <li key={idx} style={{padding: '8px 0', paddingLeft: '24px', color: 'var(--text-primary)', position: 'relative'}}>
+                                                        <span style={{position: 'absolute', left: 0, color: 'var(--accent)'}}>→</span>
+                                                        {rec}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
